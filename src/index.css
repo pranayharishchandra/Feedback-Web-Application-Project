@@ -169,6 +169,7 @@ input:focus {
   opacity: 0.9;
 }
 
+
 .btn:disabled {
   background-color: #cccccc;
   color: #333;
