@@ -138,7 +138,7 @@ input:focus {
   top: 10px;
   right: 20px;
   cursor: pointer;
-  background: none;
+  background: none; 
   border: none;
 }
 

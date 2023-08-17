@@ -1,11 +1,21 @@
-import React from 'react'
 
-function Card() {
+
+function Card({children, reverse}) {
+    // const darkMode = {
+    //     backgroundColor : 'rgba(0,0,0,0.6)',
+    //     color : 'white'
+    // }
   return (
-    <div>
-      
+    // <div  className='card' style={reverse && darkMode}>
+    // <div  className='card reverse'>
+    <div  className= {`card ${reverse && "reverse"}`} >
+      {children}
     </div>
   )
 }
 
-export default Card
+Card.defaultProp = {
+    reverse : false,
+}
+
+export default Card;
