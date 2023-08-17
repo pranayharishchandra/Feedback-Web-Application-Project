@@ -2,6 +2,7 @@ import Header from './components/Header'
 // import FeedbackItem from './components/FeedbackItem'
 import FeedbackList from './components/FeedbackList';
 import FeedbackData from './data/FeedbackData';
+import FeedbackStats from './components/FeedbackStats';
 
 
 
@@ -19,10 +20,10 @@ function App() {
     return (
         <>
             <Header/>
+            <FeedbackStats arrOfObj={feedackArrOfObj}/>
             <div className='container'>
 
                 <FeedbackList arrOfObj={feedackArrOfObj}
-                            //   handleDelete={(id) => console.log("App",id)} />
                               handleDelete={(id) => deleteFeedback(id)} />
                             
 
