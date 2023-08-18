@@ -61,16 +61,21 @@ header {
 }
 
 .rating li,
-.num-display {
+.num-display 
+{
   position: relative;
   background: #f4f4f4;
+  border: 1px #eee solid;
   width: 50px;
   height: 50px;
-  padding: 10px;
-  text-align: center;
+  /* padding bringing the numbers to center */
+  padding:  10px; 
+
+  margin: 2px;
   border-radius: 50%;
+  text-align: center;
   font-size: 19px;
-  border: 1px #eee solid;
+
   transition: 0.3s;
 }
 
@@ -86,20 +91,25 @@ header {
   cursor: pointer;
 }
 
+/* hovering over the list item  */
 .rating li:hover,
-.num-display {
+.num-display 
+{
   background: #ff6a95;
   color: #fff;
 }
 
+/* hiding the selection circle  */
 [type='radio'] {
   opacity: 0;
 }
 
+/* make checked list item background pink and text white  */
 [type='radio']:checked ~ label {
   background: #ff6a95;
   color: #fff;
-}
+} 
+
 
 .input-group {
   display: flex;
@@ -128,6 +138,8 @@ input:focus {
 
 .num-display {
   position: absolute;
+  top: -10px;
+  left: -10px;
   top: -10px;
   left: -10px;
 }

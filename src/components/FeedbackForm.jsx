@@ -1,12 +1,14 @@
 import { useState } from "react"
 import Card from "./shared/Card"
 import Button from "./shared/Button";
+import RatingSelect from "./RatingSelect";
 
 
 function FeedbackForm() {
     const [text, setText] = useState("")
     const [btnDisabled, setBtnDisabled] = useState(true) // it will be disabled until we write 10 characters
     const [message, setMessage] = useState("")
+    const [rating, setRating] = useState(10)
 
 
 
@@ -22,8 +24,10 @@ function FeedbackForm() {
         } 
         else if (text.trim().length < 10) {
             setMessage("Type atleast 10 characters");
+            setBtnDisabled(true);
         } 
         else {
+            setBtnDisabled(false);
             setMessage(null);
     
         }
@@ -36,20 +40,28 @@ function FeedbackForm() {
 
   return (
     <Card>
-        HOW WOULD YOU RATE THIS SERVICE
+        <h2>HOW WOULD YOU RATE THIS SERVICE</h2>
+
+        {/* BOTH THE FOLLOWING METHODS WORSK  */}
+        {/* <RatingSelect select={(rating) => setRating(rating)} selected={rating} /> */}
+        <RatingSelect select={setRating} selected={rating} /> 
+        
+
+
+        {/* TAKING INPUT */}
         <div className="input-group">
-                <input type="text" 
-                    placeholder="write your review here"
-                    value={text}
-                    onChange={textChangeHandler} />
+            <input type="text" 
+                placeholder="write your review here"
+                value={text}
+                onChange={textChangeHandler} />
 
-                <Button type="submit"
-                        // version='secondary'
-                        isDisabled={btnDisabled}
+            <Button type="submit"
+                    // version='secondary'
+                    isDisabled={btnDisabled}
 
-                        >
-                            Send
-                        </Button>
+                    >
+                        Send
+                    </Button>
 
         </div>
         {message}
