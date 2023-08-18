@@ -4,7 +4,9 @@ import Button from "./shared/Button";
 import RatingSelect from "./RatingSelect";
 
 
-function FeedbackForm() {
+
+
+function FeedbackForm({addFeedback}) {
     const [text, setText] = useState("")
     const [btnDisabled, setBtnDisabled] = useState(true) // it will be disabled until we write 10 characters
     const [message, setMessage] = useState("")
@@ -36,37 +38,62 @@ function FeedbackForm() {
         setText(e.target.value);
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        if (text.trim().length > 10) {
+          setBtnDisabled(false);
+          const newFeedback = {
+            text,
+            rating,
+          }
+
+        //   console.log(newFeedback);
+          addFeedback(newFeedback);
+    
+
+    
+
+          setBtnDisabled(true) ;
+          setRating(10) ;
+          setText('');
+        }
+      }
+
 
 
   return (
     <Card>
-        <h2>HOW WOULD YOU RATE THIS SERVICE</h2>
+        <form onSubmit={handleSubmit}>
 
-        {/* BOTH THE FOLLOWING METHODS WORSK  */}
-        {/* <RatingSelect select={(rating) => setRating(rating)} selected={rating} /> */}
-        <RatingSelect select={setRating} selected={rating} /> 
-        
+            <h2>HOW WOULD YOU RATE THIS SERVICE</h2>
 
-
-        {/* TAKING INPUT */}
-        <div className="input-group">
-            <input type="text" 
-                placeholder="write your review here"
-                value={text}
-                onChange={textChangeHandler} />
-
-            <Button type="submit"
-                    // version='secondary'
-                    isDisabled={btnDisabled}
-
-                    >
-                        Send
-                    </Button>
-
-        </div>
-        {message}
+            {/* BOTH THE FOLLOWING METHODS WORSK  */}
+            {/* <RatingSelect select={(rating) => setRating(rating)} selected={rating} /> */}
+            <RatingSelect select={setRating} selected={rating} /> 
+            
 
 
+            {/* TAKING INPUT */}
+            <div className="input-group">
+                <input type="text" 
+                    placeholder="write your review here"
+                    value={text}
+                    onChange={textChangeHandler} 
+                    />
+
+                <Button type="submit"
+                        version='secondary'
+                        isDisabled={btnDisabled}
+                        // onClick={handleSubmit}
+                        >
+                            Send
+                        </Button>
+
+            </div>
+            {message}
+
+
+        </form>
     </Card>
   )
 }
