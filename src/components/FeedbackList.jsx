@@ -5,6 +5,7 @@
 
 import FeedbackItem from "./FeedbackItem";
 import PropTypes from "prop-types";
+import { motion, AnimatePresence } from "framer-motion";
 
 // function FeedbackList(props) {
 //     const arrOfObj = props.arrOfObjj;
@@ -18,13 +19,37 @@ function FeedbackList({ arrOfObj, handleDelete }) {  // name of prop is arrOfObj
 
     return (
         <div>
-            {   // to write the js part.. write it within { }
-                arrOfObj.map((obj) => <FeedbackItem key={obj.id} 
-                                                    obj={obj} 
-                                                    handleDelete={handleDelete}/>)
-            }
+                <AnimatePresence>
+
+                {   // to write the js part.. write it within { }
+                    arrOfObj.map((obj) => (
+                                    <motion.div key={obj.id} 
+                                                initial={{opacity:0}}
+                                                // initial={{display:'hidden'}}
+                                                // initial={{display:'none'}}
+                                                animate={{opacity:1}}
+                                                exit={{opacity:0}}
+                                                >
+                                         <FeedbackItem key={obj.id} 
+                                                        obj={obj} 
+                                                        handleDelete={handleDelete}/>
+                                    </ motion.div>
+                ))}
+            </AnimatePresence>
         </div>
     )
+
+
+    // VERSION WITHOUT ANIMATION 
+    // return (
+    //     <div>
+    //         {   // to write the js part.. write it within { }
+    //             arrOfObj.map((obj) => <FeedbackItem key={obj.id} 
+    //                                                 obj={obj} 
+    //                                                 handleDelete={handleDelete}/>)
+    //         }
+    //     </div>
+    // )
 }
 
 
