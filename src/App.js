@@ -18,7 +18,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
 import { useState }     from 'react';
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 
 
 
@@ -32,12 +32,7 @@ function App()
     //     setFeedackArrOfObj(feedackArrOfObj.filter((obj) => obj.id !== id))
     // }
 
-    function addFeedback(newFeedbackObj) {
-        newFeedbackObj.id = uuidv4();
-        setFeedackArrOfObj([newFeedbackObj, ...feedackArrOfObj]);
 
-        // console.log("app", newFeedbackObj)
-    }
 
     return (
         <FeedbackProvider>
@@ -55,7 +50,9 @@ function App()
                             <>
 
                                 <div className="container">
-                                    <FeedbackForm addFeedback={addFeedback} />
+                                    <FeedbackForm 
+                                        // addFeedback={addFeedback} 
+                                    />
                                     <FeedbackStats 
                                     // arrOfObj={feedackArrOfObj} 
                                     />

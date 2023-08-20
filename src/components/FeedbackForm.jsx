@@ -5,15 +5,21 @@ import Button       from "./shared/Button";
 import RatingSelect from "./RatingSelect";
 
 
+import { useContext }  from "react";
+import FeedbackContext from "../context/FeedbackContext";
 
 
-function FeedbackForm({addFeedback}) {
-    const [text, setText] = useState("");
+
+
+// function FeedbackForm({ addFeedback }) {
+function FeedbackForm( ) 
+{
+    const [text, setText]               = useState("");
     const [btnDisabled, setBtnDisabled] = useState(true) ;// it will be disabled until we write 10 characters
-    const [message, setMessage] = useState("");
-    const [rating, setRating] = useState(10);
+    const [message, setMessage]         = useState("");
+    const [rating, setRating]           = useState(10);
 
-
+    const { addFeedback } = useContext(FeedbackContext);
 
     
     

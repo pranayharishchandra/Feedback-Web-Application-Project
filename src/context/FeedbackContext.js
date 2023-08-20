@@ -1,4 +1,5 @@
 import { createContext, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 const FeedbackContext = createContext();
 
@@ -19,11 +20,20 @@ export function FeedbackProvider ({ children }) {
         setFeedBack(feedBack_arrObj.filter((obj) => obj.id !== id))
     }
 
+    // 
+    function addFeedback(newFeedbackObj) {
+        newFeedbackObj.id = uuidv4();
+        setFeedBack([newFeedbackObj, ...feedBack_arrObj]);
+
+        // console.log("app", newFeedbackObj)
+    }
+
 
     // passing an 'arrayOfObj' as an obj
     return (<FeedbackContext.Provider value={{ 
                         arrOfObj: feedBack_arrObj,
                         handleDelete: deleteFeedback,
+                        addFeedback,
                         }}>
         {children}
     </FeedbackContext.Provider>)
