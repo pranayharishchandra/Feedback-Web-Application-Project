@@ -1,33 +1,36 @@
-import React from 'react';
+import React          from 'react';
 
-import Header from './components/Header'
+import Header         from './components/Header'
 // import FeedbackItem from './components/FeedbackItem'
-import FeedbackList from './components/FeedbackList';
-import FeedbackData from './data/FeedbackData';
-import FeedbackStats from './components/FeedbackStats';
-import FeedbackForm from './components/FeedbackForm';
-import AboutIconLink from './components/AboutIconLink';
-import Post from './components/Post';
+import FeedbackList   from './components/FeedbackList';
+import FeedbackData   from './data/FeedbackData';
+import FeedbackStats  from './components/FeedbackStats';
+import FeedbackForm   from './components/FeedbackForm';
+import AboutIconLink  from './components/AboutIconLink';
+import Post           from './components/Post';
+import AboutPage      from './pages/AboutPage';
 
-import AboutPage from './pages/AboutPage';
+import { FeedbackProvider } from './context/FeedbackContext';
+
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
 
 
-import { useState } from 'react';
+import { useState }     from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 
 
 /** APIs AND DATA ARE MANAGED IN APP, not the components */
 
-function App() {
+function App() 
+{
     const [feedackArrOfObj, setFeedackArrOfObj] = useState(FeedbackData);
 
-    function deleteFeedback(id) {
-        setFeedackArrOfObj(feedackArrOfObj.filter((obj) => obj.id !== id))
-    }
+    // function deleteFeedback(id) {
+    //     setFeedackArrOfObj(feedackArrOfObj.filter((obj) => obj.id !== id))
+    // }
 
     function addFeedback(newFeedbackObj) {
         newFeedbackObj.id = uuidv4();
@@ -37,40 +40,43 @@ function App() {
     }
 
     return (
-
-        <Router>    
- {/* If you want your header to remain present on every page of your application, 
+        <FeedbackProvider>
+            <Router>
+                {/* If you want your header to remain present on every page of your application, 
     you can achieve this by placing the <Header /> component 
     outside of the <Routes> component. 
     This will ensure that the header is rendered on every route within your       application.*/}
                 <Header />  {/* This will render the header on every page */}
-            <Routes>
+                <Routes>
 
-                <Route
-                    path="/"
-                    element={(
-                        <>
+                    <Route
+                        path="/"
+                        element={(
+                            <>
 
-                            <div className="container">
-                            <FeedbackForm addFeedback={addFeedback} />
-                            <FeedbackStats arrOfObj={feedackArrOfObj} />
-                                <FeedbackList
-                                    arrOfObj={feedackArrOfObj}
-                                    handleDelete={(id) => deleteFeedback(id)}
-                                />
-                            </div>
-                            <AboutIconLink/>
+                                <div className="container">
+                                    <FeedbackForm addFeedback={addFeedback} />
+                                    <FeedbackStats 
+                                    // arrOfObj={feedackArrOfObj} 
+                                    />
+                                    <FeedbackList
+                                        // arrOfObj={feedackArrOfObj}
+                                        // handleDelete={(id) => deleteFeedback(id)}
+                                    />
+                                </div>
+                                <AboutIconLink />
 
-                        </>
-                    )}
-                />
+                            </>
+                        )}
+                    />
 
                     <Route path="/about" element={<AboutPage />} />
                     <Route path="/*" element={<Post status={404} />} />
 
-            </Routes>
+                </Routes>
                 {/* <AboutIconLink/> */}
-        </Router>
+            </Router>
+        </FeedbackProvider>
 
     )
 

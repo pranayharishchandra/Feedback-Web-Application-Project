@@ -1,16 +1,18 @@
-import Card from './shared/Card';
+import   Card      from './shared/Card';
 import { FaTimes } from 'react-icons/fa';
 
+import { useContext }  from 'react';
+import FeedbackContext from '../context/FeedbackContext';
 
-function FeedbackItem ({obj, handleDelete}) {
+
+// function FeedbackItem ( { obj, handleDelete } ) {
+function FeedbackItem ( { obj } ) {
 
     // function closeHandler(id) {
     //     console.log(id);
     // }
 
-
-
-
+    const { handleDelete } = useContext(FeedbackContext);
 
     const darkMode = true;
 

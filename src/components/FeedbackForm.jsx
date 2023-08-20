@@ -1,18 +1,17 @@
 import { useState } from "react"
-import { Route } from "react-router-dom";
 
-import Card from "./shared/Card"
-import Button from "./shared/Button";
+import Card         from "./shared/Card"
+import Button       from "./shared/Button";
 import RatingSelect from "./RatingSelect";
 
 
 
 
 function FeedbackForm({addFeedback}) {
-    const [text, setText] = useState("")
-    const [btnDisabled, setBtnDisabled] = useState(true) // it will be disabled until we write 10 characters
-    const [message, setMessage] = useState("")
-    const [rating, setRating] = useState(10)
+    const [text, setText] = useState("");
+    const [btnDisabled, setBtnDisabled] = useState(true) ;// it will be disabled until we write 10 characters
+    const [message, setMessage] = useState("");
+    const [rating, setRating] = useState(10);
 
 
 

@@ -1,6 +1,15 @@
-import PropTypes from 'prop-types';
+// import PropTypes       from 'prop-types';
 
-function FeedbackStats({ arrOfObj }) {
+
+import { useContext }  from 'react';
+import FeedbackContext from '../context/FeedbackContext';
+
+
+
+// function FeedbackStats({ arrOfObj }) {
+function FeedbackStats( ) {
+
+    const { arrOfObj } = useContext(FeedbackContext); 
 
     // function avgRating () {
     //     let n = arrOfObj.length;
@@ -26,9 +35,9 @@ function FeedbackStats({ arrOfObj }) {
 }
 
 
-FeedbackStats.propTypes = {
-    arrOfObj : PropTypes.array.isRequired,
-}
+// FeedbackStats.propTypes = {
+//     arrOfObj : PropTypes.array.isRequired,
+// }
 
 
 
