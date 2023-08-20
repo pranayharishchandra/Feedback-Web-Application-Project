@@ -1,5 +1,5 @@
 import   Card      from './shared/Card';
-import { FaTimes } from 'react-icons/fa';
+import { FaTimes, FaEdit } from 'react-icons/fa';
 
 import { useContext }  from 'react';
 import FeedbackContext from '../context/FeedbackContext';
@@ -12,7 +12,7 @@ function FeedbackItem ( { obj } ) {
     //     console.log(id);
     // }
 
-    const { handleDelete } = useContext(FeedbackContext);
+    const { handleDelete, editFeedback } = useContext(FeedbackContext);
 
     const darkMode = true;
 
@@ -23,6 +23,10 @@ function FeedbackItem ( { obj } ) {
 
             <button className='close' onClick={() => handleDelete(obj.id)}>
                 <FaTimes color='red' />
+            </button>
+
+            <button className='edit' onClick={() => editFeedback(obj)}>
+                <FaEdit color='yellowgreen' />
             </button>
 
             <div className="text-display">{obj.text}</div>

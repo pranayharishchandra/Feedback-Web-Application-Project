@@ -7,17 +7,20 @@ import FeedbackItem from "./FeedbackItem";
 // import PropTypes    from "prop-types";
 import { motion, AnimatePresence } from "framer-motion";
 
-import { useContext }  from "react";
+import { useContext } from "react";
 import FeedbackContext from "../context/FeedbackContext";
 
 // function FeedbackList(props) {
 //     const arrOfObj = props.arrOfObjj;
 // function FeedbackList({ arrOfObj, handleDelete }) {  // name of prop is arrOfObj
 // function FeedbackList({ handleDelete }) {  // name of prop is arrOfObj
-function FeedbackList( ) {  // name of prop is arrOfObj
+function FeedbackList() {  // name of prop is arrOfObj
 
 
     const { arrOfObj } = useContext(FeedbackContext);
+
+
+
 
     // BEFORE --> feedbackDelete -> App to FeedbackList to FeedbackItem
 
@@ -30,24 +33,24 @@ function FeedbackList( ) {  // name of prop is arrOfObj
 
     return (
         <div>
-                <AnimatePresence>
+            <AnimatePresence>
 
                 {   // to write the js part.. write it within { }
                     arrOfObj.map((obj) => (
-                                    <motion.div key={obj.id} 
-                                                initial={{opacity:0}}
-                                                // initial={{display:'hidden'}}
-                                                // initial={{display:'none'}}
-                                                animate={{opacity:1}}
-                                                // exit={{opacity:0}}
-                                                exit={{display:'none'}}
-                                                >
-                                         <FeedbackItem key={obj.id} 
-                                                        obj={obj} 
-                                                        // handleDelete={handleDelete}
-                                                        />
-                                    </ motion.div>
-                ))}
+                        <motion.div key={obj.id}
+                            initial={{ opacity: 0 }}
+                            // initial={{display:'hidden'}}
+                            // initial={{display:'none'}}
+                            animate={{ opacity: 1 }}
+                            // exit={{opacity:0}}
+                            exit={{ display: 'none' }}
+                        >
+                            <FeedbackItem key={obj.id}
+                                obj={obj}
+                            // handleDelete={handleDelete}
+                            />
+                        </ motion.div>
+                    ))}
             </AnimatePresence>
         </div>
     )

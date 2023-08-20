@@ -5,7 +5,7 @@ import Button       from "./shared/Button";
 import RatingSelect from "./RatingSelect";
 
 
-import { useContext }  from "react";
+import { useContext, useEffect }  from "react";
 import FeedbackContext from "../context/FeedbackContext";
 
 
@@ -19,8 +19,21 @@ function FeedbackForm( )
     const [message, setMessage]         = useState("");
     const [rating, setRating]           = useState(10);
 
-    const { addFeedback } = useContext(FeedbackContext);
+    const { addFeedback, feedbackEdit } = useContext(FeedbackContext);
 
+    useEffect(() => {
+        // console.log("hello, you clicked edit")
+        if (feedbackEdit.edit === true) {
+            // feedbackEdit.edit is true becuase it's state have changed by clikcing the edit button in feedbackItems,
+            // clicking that called the editFeedback fuction in FeedbackContext and 
+            // that function changed it's state
+            // and after it's state was changed then this useEffect function was called, which first verified that that is that the item we want to change... 
+            // may be doning it is useless
+            setBtnDisabled(false);
+            setText(feedbackEdit.feedbackItem.text);
+            setRating(feedbackEdit.feedbackItem.rating);
+        }
+    },[ feedbackEdit ])
     
     
     
