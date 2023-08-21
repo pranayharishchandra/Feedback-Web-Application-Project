@@ -35,29 +35,49 @@ function FeedbackForm() {
     }, [feedbackEdit]);
 
     
-
-
+    // BUG SOLVED
+    useEffect(() => {
+        if (text.trim().length >= 10) {
+            setBtnDisabled(false);
+        } else {
+            setBtnDisabled(true);
+        }
+    }, [text]);
 
     function textChangeHandler(e) {
+        const newText = e.target.value;
+        setText(newText);
 
-        if (text.length === 0) {
+        if (newText.length === 0) {
             setMessage(null);
-            // setMessage("");
-            setBtnDisabled(true);
-        }
-        else if (text.trim().length < 10) {
-            setMessage("Type atleast 10 characters");
-            setBtnDisabled(true);
-        }
-        else {
-            setBtnDisabled(false);
+        } else if (newText.trim().length < 10) {
+            setMessage("Type at least 10 characters");
+        } else {
             setMessage(null);
-
         }
-        console.log(text);
-
-        setText(e.target.value);
     }
+
+    // BUGGY CODE
+    // function textChangeHandler(e) {
+
+    //     if (text.length === 0) {
+    //         setMessage(null);
+    //         // setMessage("");
+    //         setBtnDisabled(true);
+    //     }
+    //     else if (text.trim().length < 10) {
+    //         setMessage("Type atleast 10 characters");
+    //         setBtnDisabled(true);
+    //     }
+    //     else {
+    //         setBtnDisabled(false);
+    //         setMessage(null);
+
+    //     }
+    //     console.log(text);
+
+    //     setText(e.target.value);
+    // }
 
     const handleSubmit = (e) => {
         e.preventDefault()
