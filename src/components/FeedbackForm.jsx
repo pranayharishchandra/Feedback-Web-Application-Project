@@ -21,7 +21,7 @@ function FeedbackForm() {
     const { addFeedback, feedbackEdit, updateFeedback } = useContext(FeedbackContext);
 
     useEffect(() => {
-        // console.log("hello, you clicked edit")
+        console.log("hello, you clicked edit",)
         if (feedbackEdit.edit === true) {
             // feedbackEdit.edit is true becuase it's state have changed by clikcing the edit button in feedbackItems,
             // clicking that called the editFeedback fuction in FeedbackContext and 
@@ -32,7 +32,9 @@ function FeedbackForm() {
             setText(feedbackEdit.feedbackItem.text);
             setRating(feedbackEdit.feedbackItem.rating);
         }
-    }, [feedbackEdit])
+    }, [feedbackEdit]);
+
+    
 
 
 
@@ -67,15 +69,16 @@ function FeedbackForm() {
                 rating,
             }
 
-            addFeedback(newFeedback);
-
-            // if (feedbackEdit.edit === true) {
-            //     updateFeedback(feedbackEdit.feedbackItem.id, feedbackEdit);
-            // }
-            // else {
-            //     //   console.log(newFeedback);
-            //     addFeedback(newFeedback);
-            // }
+            if (feedbackEdit.edit === true) {
+                console.log('edit-mode : on, updating items')
+                updateFeedback(feedbackEdit.feedbackItem.id, newFeedback);
+                feedbackEdit.edit = false;
+            }
+            else {
+                console.log('edit-mode : off, adding items')
+                //   console.log(newFeedback);
+                addFeedback(newFeedback);
+            }
 
 
             setBtnDisabled(true);

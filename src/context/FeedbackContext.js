@@ -48,15 +48,15 @@ export function FeedbackProvider ({ children }) {
     }
 
     // update feedback
-    function updateFeedback (id, updatedItem) {
-        console.log(id, updatedItem);
+    function updateFeedback (id, newFeedback) {
+        console.log("updateFeedback", id, newFeedback);
         // UPDATING THE FEEDBACK WHEN SEND CLICKED
         setFeedBack(
-            feedBack_arrObj.map((obj) => (
-                obj.id === id ? 
-                    { ...obj, ...updatedItem }
+            feedBack_arrObj.map((obj) => 
+                (obj.id === id) 
+                    ? { id, ...newFeedback }
                     : obj
-            ))
+            )
         )
     }
 

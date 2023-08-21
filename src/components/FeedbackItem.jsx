@@ -26,7 +26,8 @@ function FeedbackItem ( { obj } ) {
             </button>
 
             <button className='edit' onClick={() => editFeedback(obj)}>
-                <FaEdit color='yellowgreen' />
+                <FaEdit style={{color:'yellowgreen'}} />
+                {/* <FaEdit color='yellowgreen' /> */} 
             </button>
 
             <div className="text-display">{obj.text}</div>
