@@ -47,6 +47,19 @@ export function FeedbackProvider ({ children }) {
         })
     }
 
+    // update feedback
+    function updateFeedback (id, updatedItem) {
+        console.log(id, updatedItem);
+        // UPDATING THE FEEDBACK WHEN SEND CLICKED
+        setFeedBack(
+            feedBack_arrObj.map((obj) => (
+                obj.id === id ? 
+                    { ...obj, ...updatedItem }
+                    : obj
+            ))
+        )
+    }
+
 
     // passing an 'arrayOfObj' as an obj
     return (<FeedbackContext.Provider value={{ 
@@ -54,7 +67,8 @@ export function FeedbackProvider ({ children }) {
                         handleDelete: deleteFeedback,
                         addFeedback,
                         feedbackEdit,
-                        editFeedback
+                        editFeedback,
+                        updateFeedback,
                         }}>
         {children}
     </FeedbackContext.Provider>)

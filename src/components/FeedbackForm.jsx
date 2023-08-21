@@ -1,25 +1,24 @@
 import { useState } from "react"
 
-import Card         from "./shared/Card"
-import Button       from "./shared/Button";
+import Card from "./shared/Card"
+import Button from "./shared/Button";
 import RatingSelect from "./RatingSelect";
 
 
-import { useContext, useEffect }  from "react";
+import { useContext, useEffect } from "react";
 import FeedbackContext from "../context/FeedbackContext";
 
 
 
 
 // function FeedbackForm({ addFeedback }) {
-function FeedbackForm( ) 
-{
-    const [text, setText]               = useState("");
-    const [btnDisabled, setBtnDisabled] = useState(true) ;// it will be disabled until we write 10 characters
-    const [message, setMessage]         = useState("");
-    const [rating, setRating]           = useState(10);
+function FeedbackForm() {
+    const [text, setText] = useState("");
+    const [btnDisabled, setBtnDisabled] = useState(true);// it will be disabled until we write 10 characters
+    const [message, setMessage] = useState("");
+    const [rating, setRating] = useState(10);
 
-    const { addFeedback, feedbackEdit } = useContext(FeedbackContext);
+    const { addFeedback, feedbackEdit, updateFeedback } = useContext(FeedbackContext);
 
     useEffect(() => {
         // console.log("hello, you clicked edit")
@@ -33,25 +32,25 @@ function FeedbackForm( )
             setText(feedbackEdit.feedbackItem.text);
             setRating(feedbackEdit.feedbackItem.rating);
         }
-    },[ feedbackEdit ])
-    
-    
-    
-    function textChangeHandler (e) {
-        
+    }, [feedbackEdit])
+
+
+
+    function textChangeHandler(e) {
+
         if (text.length === 0) {
             setMessage(null);
             // setMessage("");
             setBtnDisabled(true);
-        } 
+        }
         else if (text.trim().length < 10) {
             setMessage("Type atleast 10 characters");
             setBtnDisabled(true);
-        } 
+        }
         else {
             setBtnDisabled(false);
             setMessage(null);
-    
+
         }
         console.log(text);
 
@@ -61,63 +60,69 @@ function FeedbackForm( )
     const handleSubmit = (e) => {
         e.preventDefault()
         if (text.trim().length > 10) {
-          setBtnDisabled(false);
-          const newFeedback = {
-            text,
-            rating,
-          }
+            setBtnDisabled(false);
 
-        //   console.log(newFeedback);
-          addFeedback(newFeedback);
-    
+            const newFeedback = {
+                text,
+                rating,
+            }
 
-    
+            addFeedback(newFeedback);
 
-          setBtnDisabled(true) ;
-          setRating(10) ;
-          setText('');
+            // if (feedbackEdit.edit === true) {
+            //     updateFeedback(feedbackEdit.feedbackItem.id, feedbackEdit);
+            // }
+            // else {
+            //     //   console.log(newFeedback);
+            //     addFeedback(newFeedback);
+            // }
+
+
+            setBtnDisabled(true);
+            setRating(10);
+            setText('');
         }
-      }
+    }
 
 
 
-  return (
+    return (
 
 
-    <Card>
-        <form onSubmit={handleSubmit}>
+        <Card>
+            <form onSubmit={handleSubmit}>
 
-            <h2>HOW WOULD YOU RATE THIS SERVICE</h2>
+                <h2>HOW WOULD YOU RATE THIS SERVICE</h2>
 
-            {/* BOTH THE FOLLOWING METHODS WORSK  */}
-            {/* <RatingSelect select={(rating) => setRating(rating)} selected={rating} /> */}
-            <RatingSelect select={setRating} selected={rating} /> 
-            
+                {/* BOTH THE FOLLOWING METHODS WORSK  */}
+                {/* <RatingSelect select={(rating) => setRating(rating)} selected={rating} /> */}
+                <RatingSelect select={setRating} selected={rating} />
 
 
-            {/* TAKING INPUT */}
-            <div className="input-group">
-                <input type="text" 
-                    placeholder="write your review here"
-                    value={text}
-                    onChange={textChangeHandler} 
+
+                {/* TAKING INPUT */}
+                <div className="input-group">
+                    <input type="text"
+                        placeholder="write your review here"
+                        value={text}
+                        onChange={textChangeHandler}
                     />
 
-                <Button type="submit"
+                    <Button type="submit"
                         version='secondary'
                         isDisabled={btnDisabled}
-                        // onClick={handleSubmit}
-                        >
-                            Send
-                        </Button>
+                    // onClick={handleSubmit}
+                    >
+                        Send
+                    </Button>
 
-            </div>
-            {message}
+                </div>
+                {message}
 
 
-        </form>
-    </Card>
-  )
+            </form>
+        </Card>
+    )
 }
 
 export default FeedbackForm
