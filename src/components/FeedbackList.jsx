@@ -17,7 +17,7 @@ import FeedbackContext from "../context/FeedbackContext";
 function FeedbackList() {  // name of prop is arrOfObj
 
 
-    const { arrOfObj } = useContext(FeedbackContext);
+    const { arrOfObj, isLoading } = useContext(FeedbackContext);
 
 
 
@@ -25,12 +25,14 @@ function FeedbackList() {  // name of prop is arrOfObj
     // BEFORE --> feedbackDelete -> App to FeedbackList to FeedbackItem
 
 
-    if (arrOfObj.length === 0 || !arrOfObj)
+    if (isLoading && (arrOfObj.length === 0 || !arrOfObj))
         return (
-            <p>NO FEEDBACKS</p>
+            <p>NO FEEDBACKS TO SHOW</p>
         )
 
 
+
+    
     return (
         <div>
             <AnimatePresence>

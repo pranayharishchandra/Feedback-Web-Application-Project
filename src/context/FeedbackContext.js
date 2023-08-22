@@ -1,6 +1,6 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import { v4 as uuidv4 }            from 'uuid';
-import FeedbackData from '../data/FeedbackData';
+// import FeedbackData from '../data/FeedbackData';
 
 const FeedbackContext = createContext();
 
@@ -8,17 +8,48 @@ const FeedbackContext = createContext();
 // FeedbackProvider -> is not a default, so using { } to import
 export function FeedbackProvider ({ children }) {
     // feedBack -- below is an arrayOfObj, which we are actually taking as an output
-    const [feedBack_arrObj, setFeedBack] = useState([       
-            ...FeedbackData
-    ]);
+    // const [feedBack_arrObj, setFeedBack] = useState([  ...FeedbackData ]);
+    const [feedBack_arrObj, setFeedBack] = useState([ ]);
 
     // const [feedBack_arrObj, setFeedBack] = useState([
-    //     {
-    //         id: 1,
-    //         text: "item from context",
-    //         rating: 10,
-    //     }
-    // ]);
+        //     {
+            //         id: 1,
+            //         text: "item from context",
+            //         rating: 10,
+            //     }
+            // ]);
+            
+    const [isLoading, setIsLoading] = useState(true); // set this to true or false, as u wish
+
+    // if (feedBack_arrObj.length === 0 || !feedBack_arrObj) {
+
+    // }
+
+    useEffect (() => {
+        console.log("hello from useEffect FeedbackContext");
+        fetchFeedback();
+    }, []);
+
+
+    // Feedback
+    async function fetchFeedback () {
+        const response = await fetch(`http://localhost:5000/feedback?l_sort=id&_order=desc`);
+        const data = await response.json();
+
+        setFeedBack(data);
+        // console.log(data);
+        setIsLoading(false);
+    }
+
+
+
+
+
+
+
+
+
+
 
     // handleDelete
     function deleteFeedback(id) {
@@ -60,6 +91,9 @@ export function FeedbackProvider ({ children }) {
         )
     }
 
+    
+
+
 
     // passing an 'arrayOfObj' as an obj
     return (<FeedbackContext.Provider value={{ 
@@ -69,6 +103,7 @@ export function FeedbackProvider ({ children }) {
                         feedbackEdit,
                         editFeedback,
                         updateFeedback,
+                        isLoading,
                         }}>
         {children}
     </FeedbackContext.Provider>)
