@@ -20,23 +20,25 @@ function FeedbackList() {  // name of prop is arrOfObj
 
     const { arrOfObj, isLoading } = useContext(FeedbackContext);
 
+    
+
+    if (isLoading) {
+        return (<Spinner />)
+    }
 
 
 
     // BEFORE --> feedbackDelete -> App to FeedbackList to FeedbackItem
 
 
-    if (!isLoading && (arrOfObj.length === 0 || !arrOfObj))
+    if (arrOfObj.length === 0 || !arrOfObj)
         return (
             <p>NO FEEDBACKS TO SHOW</p>
         )
 
 
-    return !isLoading 
-            ? <Spinner />
-            :
-        (
-    // return (
+
+    return (
         <div>
             <AnimatePresence>
 

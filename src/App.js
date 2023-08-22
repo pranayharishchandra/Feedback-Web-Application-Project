@@ -41,6 +41,8 @@ function App()
     you can achieve this by placing the <Header /> component 
     outside of the <Routes> component. 
     This will ensure that the header is rendered on every route within your       application.*/}
+                <div className='wrapper'>
+
                 <Header />  {/* This will render the header on every page */}
                 <Routes>
 
@@ -71,6 +73,7 @@ function App()
                     <Route path="/*" element={<Post status={404} />} />
 
                 </Routes>
+                    </div>
                 {/* <AboutIconLink/> */}
             </Router>
         </FeedbackProvider>
