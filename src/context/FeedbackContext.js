@@ -33,9 +33,10 @@ export function FeedbackProvider ({ children }) {
 
     // Feedback
     async function fetchFeedback () {
+        // setIsLoading(true);
         const response = await fetch(`http://localhost:5000/feedback?l_sort=id&_order=desc`);
         const data = await response.json();
-
+        
         setFeedBack(data);
         // console.log(data);
         setIsLoading(false);

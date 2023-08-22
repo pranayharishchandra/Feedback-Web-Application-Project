@@ -9,6 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { useContext } from "react";
 import FeedbackContext from "../context/FeedbackContext";
+import Spinner from "./shared/Spinner";
 
 // function FeedbackList(props) {
 //     const arrOfObj = props.arrOfObjj;
@@ -25,15 +26,17 @@ function FeedbackList() {  // name of prop is arrOfObj
     // BEFORE --> feedbackDelete -> App to FeedbackList to FeedbackItem
 
 
-    if (isLoading && (arrOfObj.length === 0 || !arrOfObj))
+    if (!isLoading && (arrOfObj.length === 0 || !arrOfObj))
         return (
             <p>NO FEEDBACKS TO SHOW</p>
         )
 
 
-
-    
-    return (
+    return !isLoading 
+            ? <Spinner />
+            :
+        (
+    // return (
         <div>
             <AnimatePresence>
 
